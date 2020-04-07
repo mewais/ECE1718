@@ -1,0 +1,1 @@
+cmd_/home/root/Work/Exercise4/Part2/stopwatch.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/root/Work/Exercise4/Part2/stopwatch.ko /home/root/Work/Exercise4/Part2/stopwatch.o /home/root/Work/Exercise4/Part2/stopwatch.mod.o

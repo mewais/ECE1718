@@ -1,0 +1,1 @@
+cmd_/home/root/Work/Exercise2/Part2/custom_rtc.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/root/Work/Exercise2/Part2/custom_rtc.ko /home/root/Work/Exercise2/Part2/custom_rtc.o /home/root/Work/Exercise2/Part2/custom_rtc.mod.o

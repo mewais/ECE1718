@@ -1,0 +1,1 @@
+cmd_/home/root/Work/Exercise3/Part1/chardev.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/root/Work/Exercise3/Part1/chardev.ko /home/root/Work/Exercise3/Part1/chardev.o /home/root/Work/Exercise3/Part1/chardev.mod.o

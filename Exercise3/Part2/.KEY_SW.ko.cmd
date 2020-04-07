@@ -1,0 +1,1 @@
+cmd_/home/root/Work/Exercise3/Part2/KEY_SW.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/root/Work/Exercise3/Part2/KEY_SW.ko /home/root/Work/Exercise3/Part2/KEY_SW.o /home/root/Work/Exercise3/Part2/KEY_SW.mod.o

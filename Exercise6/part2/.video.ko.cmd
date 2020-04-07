@@ -1,0 +1,1 @@
+cmd_/home/root/Work/Exercise5/part2/video.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/root/Work/Exercise5/part2/video.ko /home/root/Work/Exercise5/part2/video.o /home/root/Work/Exercise5/part2/video.mod.o
