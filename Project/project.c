@@ -89,7 +89,7 @@ int32_t initialized;
 int64_t hfs_value_left;
 int64_t hfs_value_right;
 
-pthread_t tid;
+pthread_t keyboard_thread_id;
 pthread_mutex_t mutex_tone_volume;
 
 void update_ema (int64_t new_sample_left, int64_t new_sample_right)
@@ -116,7 +116,7 @@ void update_ema (int64_t new_sample_left, int64_t new_sample_right)
 void handle_int(int32_t dummy)
 {
 	//Handle Ctrl - C
-	pthread_cancel(tid);
+	pthread_cancel(keyboard_thread_id);
 	munmap(audio_base, AUDIO_SPAN);
 	close(fd);
 	close(key_fd);
@@ -418,7 +418,7 @@ int32_t main(int32_t argc, char** argv)
 		return -1;
 	}
 	//spawn a thread to listen to the keyboard
-	if ((err = pthread_create(&tid, NULL, &keyboard_thread, NULL)) != 0 )
+	if ((err = pthread_create(&keyboard_thread_id, NULL, &keyboard_thread, NULL)) != 0 )
 	{
 		printf("thread creation failed \n");
 		close (fd);
@@ -472,7 +472,9 @@ int32_t main(int32_t argc, char** argv)
 					playback_state = 0;
 					printf("Finished Playback\n");
 					audio_base[0x10] = audio_base[0x10] | 12;
+					pthread_mutex_unlock (&mutex_tone_volume);
 					usleep(100000);
+					pthread_mutex_lock (&mutex_tone_volume);
 					audio_base[0x10] = audio_base[0x10] & (~12);
 				}
 				//decrement the write credits since we did a write
@@ -523,7 +525,7 @@ int32_t main(int32_t argc, char** argv)
 		}
 	}
 	//cancel the thread
-	pthread_cancel(tid);
+	pthread_cancel(keyboard_thread_id);
 	//unmap the audio
 	munmap(audio_base, AUDIO_SPAN);
 	//close the character devices
